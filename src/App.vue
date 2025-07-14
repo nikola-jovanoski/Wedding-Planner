@@ -17,13 +17,11 @@
     </div>
 
     <div class="result" v-if="table !== null">
-      <!-- Animation with Vue Transition -->
       <transition name="fade-slide">
         <div class="number" v-if="table >= 0">
           Број на маса<br /><span class="num">{{ table }}</span>
         </div>
       </transition>
-      <!-- Show not-found when table is negative -->
       <div class="not-found" v-if="table < 0">
         Не го најдовме името „<strong>{{ query }}</strong>".
         <div v-if="suggestion" class="suggest">
@@ -80,15 +78,10 @@ export default {
         this.table = guest.table;
         this.suggestion = "";
       } else {
-        // Најди најсличен
         const distances = this.guests.map(g => ({ ...g, dist: levenshtein(q, g.name) }));
         distances.sort((a, b) => a.dist - b.dist);
         const best = distances[0];
-        if (best.dist <= 3) {
-          this.suggestion = best.display;
-        } else {
-          this.suggestion = "";
-        }
+        this.suggestion = best.dist <= 2 ? best.display : "";
         this.table = -1;
       }
     },
@@ -101,6 +94,7 @@ export default {
 </script>
 
 <style>
+/* Place your photo file in public/background.jpg */
 :root {
   --bg: #fff5f8;
   --accent: #d47a90;
@@ -109,22 +103,100 @@ export default {
   --font-heading: "Playfair Display", serif;
   --font-body: "Roboto", sans-serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--dark); font-family: var(--font-body); }
-.wrapper { max-width: 360px; margin: 2rem auto; padding: 1rem; text-align: center; }
-.title { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem; }
-.subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
-.form { display: flex; flex-direction: column; }
-.input { padding: 0.75rem; font-size: 1rem; border: 2px solid var(--accent); border-radius: 8px; margin-bottom: 0.5rem; }
-.input:focus { outline: none; border-color: var(--dark); }
-.btn { padding: 0.75rem; font-size: 1rem; background: var(--accent); color: var(--light); border: none; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background 0.3s, transform 0.2s; }
-.btn:hover { background: var(--dark); transform: translateY(-2px); }
-.result { margin-top: 2rem; min-height: 4rem; position: relative; }
-.fade-slide-enter-active { transition: opacity 0.6s ease, transform 0.6s ease; }
-.fade-slide-enter-from { opacity: 0; transform: translateY(20px); }
-.fade-slide-enter-to { opacity: 1; transform: translateY(0); }
-.number .num { display: block; font-size: 3rem; font-family: var(--font-heading); color: var(--accent); margin-top: 0.5rem; }
-.not-found { color: #b3475f; font-size: 0.95rem; }
-.suggest { margin-top: 0.5rem; }
-.suggest a { color: var(--accent); text-decoration: underline; cursor: pointer; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  /* Background image */
+  background-color: var(--bg);
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--dark);
+  font-family: var(--font-body);
+}
+.wrapper {
+  max-width: 360px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8); /* slight white overlay */
+  border-radius: 12px;
+}
+.title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.input {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--dark);
+}
+.btn {
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: var(--accent);
+  color: var(--light);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn:hover {
+  background: var(--dark);
+  transform: translateY(-2px);
+}
+.result {
+  margin-top: 2rem;
+  min-height: 4rem;
+}
+.fade-slide-enter-active {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-slide-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.number .num {
+  display: block;
+  font-size: 3rem;
+  font-family: var(--font-heading);
+  color: var(--accent);
+  margin-top: 0.5rem;
+}
+.not-found {
+  color: #b3475f;
+  font-size: 0.95rem;
+}
+.suggest {
+  margin-top: 0.5rem;
+}
+.suggest a {
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
 </style>
