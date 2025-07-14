@@ -1,22 +1,31 @@
 <template>
-  <div class="container">
-    <h1>Добредојдовте на свадбата на Anja и Nikola!</h1>
-    <p>Внесете го вашето име и презиме за да го најдете бројот на вашата маса:</p>
+  <div class="wrapper">
+    <h1 class="title">Добредојдовте на свадбата на Anja & Nikola</h1>
+    <p class="subtitle">
+      Внесете го вашето име и презиме за да го најдете бројот на вашата маса
+    </p>
 
-    <input
-        v-model="query"
-        @keyup.enter="findTable"
-        placeholder="Име и презиме"
-    />
-    <button @click="findTable">Потврди</button>
+    <div class="form">
+      <input
+          v-model="query"
+          @keyup.enter="findTable"
+          placeholder="Име и презиме"
+          class="input"
+      />
+      <button @click="findTable" class="btn">Потврди</button>
+    </div>
 
     <div class="result" v-if="table !== null">
-      <span v-if="table >= 0">
-        Вие сте на маса бр. {{ table }}
-      </span>
-      <span v-else>
-        Не е пронајдено име „{{ query }}“. Проверете правопис.
-      </span>
+      <div
+          class="number"
+          :class="{ show: table >= 0 }"
+          v-if="table >= 0"
+      >
+        Број на маса<br /><span class="num">{{ table }}</span>
+      </div>
+      <div class="not-found" v-else>
+        Не го најдовме името „<strong>{{ query }}</strong>“. Пробај повторно.
+      </div>
     </div>
   </div>
 </template>
@@ -51,20 +60,112 @@ export default {
 </script>
 
 <style>
-.container {
-  max-width: 400px;
+/* Theme colors */
+:root {
+  --bg: #fff5f8;
+  --accent: #d47a90;       /* rose */
+  --dark: #4d3b49;         /* deep plum */
+  --light: #ffffff;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Roboto", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--dark);
+  font-family: var(--font-body);
+}
+
+.wrapper {
+  max-width: 360px;
   margin: 2rem auto;
-  font-family: sans-serif;
+  padding: 1rem;
+  text-align: center;
 }
-input,
-button {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+}
+
+.subtitle {
   font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark);
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--dark);
+}
+
+.btn {
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: var(--accent);
+  color: var(--light);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background: var(--dark);
+  transform: translateY(-2px);
+}
+
 .result {
-  margin-top: 1rem;
-  font-weight: bold;
+  margin-top: 2rem;
+  min-height: 4rem;
+  position: relative;
+}
+
+/* Анимација: fade-in + slide-up */
+.number {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.number.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.number .num {
+  display: block;
+  font-size: 3rem;
+  font-family: var(--font-heading);
+  color: var(--accent);
+  margin-top: 0.5rem;
+}
+
+.not-found {
+  color: #b3475f;
+  font-size: 0.95rem;
 }
 </style>
