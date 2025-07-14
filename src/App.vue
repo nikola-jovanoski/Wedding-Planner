@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1 class="title">Добредојдовте на свадбата на Anja & Nikola</h1>
+    <h1 class="title">Добредојдовте на нашата свадба</h1>
     <p class="subtitle">
       Внесете го вашето име и презиме за да го најдете бројот на вашата маса
     </p>
@@ -125,6 +125,7 @@ body {
   border-radius: 12px;
 }
 .title { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem; }
+.title2 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem; }
 .subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
 .form { display: flex; flex-direction: column; }
 .input { padding: 0.75rem; font-size: 1rem; border: 2px solid var(--accent); border-radius: 8px; margin-bottom: 0.5rem; }
