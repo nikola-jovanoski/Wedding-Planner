@@ -1,7 +1,30 @@
+// src/main.js
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-createApp(App)
-    .use(router)
-    .mount('#app')
+// Font Awesome setup
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {
+    faGlassCheers,
+    faCarSide,
+    faChurch,
+    faRing,
+    faMusic,        // use a music note or dancing icon
+    faChampagneGlasses // if available in your version, else use faGlassCheers twice
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+    faGlassCheers,
+    faCarSide,
+    faChurch,
+    faRing,
+    faMusic,
+    faChampagneGlasses
+)
+
+const app = createApp(App)
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(router)
+app.mount('#app')
