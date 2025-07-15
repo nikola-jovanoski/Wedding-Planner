@@ -1,6 +1,6 @@
 <template>
   <div class="envelope" @click="$emit('open')">
-    <img src="/envelope.jpg" alt="Envelope" class="envelope-image" />
+    <img src="/envelope.png" alt="Envelope" class="envelope-image" />
   </div>
 </template>
 
