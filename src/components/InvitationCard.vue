@@ -9,14 +9,13 @@
     <p class="date">20.09.2025</p>
     <p class="venue">Ресторан „Сајгија“, Гостивар</p>
 
-    <!-- Timeline map with icons -->
-    <div class="timeline">
+    <!-- Timeline with appear animation on load -->
+    <transition-group name="fade-slide" tag="div" class="timeline" appear>
       <div
           v-for="(step, i) in steps"
           :key="i"
           class="timeline-step"
-          :data-aos="step.animation"
-          :data-aos-delay="i * 200"
+          :style="{ transitionDelay: `${i * 150}ms` }"
       >
         <font-awesome-icon :icon="step.icon" class="icon" />
         <div class="info">
@@ -24,7 +23,7 @@
           <div class="label">{{ step.label }}</div>
         </div>
       </div>
-    </div>
+    </transition-group>
 
     <!-- Families at bottom -->
     <div class="families">
@@ -35,31 +34,22 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import { reactive } from 'vue'
 
 const steps = reactive([
-  { time: '08:30', label: 'Забава кај младоженецот',             icon: ['fas', 'glass-cheers'], animation: 'fade-right' },
-  { time: '11:30', label: 'По невестата',                       icon: ['fas', 'car-side'],       animation: 'fade-left' },
-  { time: '13:30', label: 'Венчавка во црква “Св. Никола”',     icon: ['fas', 'church'],         animation: 'fade-right' },
-  { time: '18:00', label: 'Склучување на брак',                 icon: ['fas', 'ring'],           animation: 'fade-left' },
-  { time: '18:45', label: 'Прием на гости',                     icon: ['fas', 'glass-cheers'],   animation: 'fade-right' },
-  { time: '20:00', label: 'Прв танц',                           icon: ['fas', 'music'],          animation: 'fade-left' }
+  { time: '08:30', label: 'Забава кај младоженецот',     icon: ['fas','champagne-glasses'] },
+  { time: '11:30', label: 'По невестата',                icon: ['fas','car-side']         },
+  { time: '13:30', label: 'Венчавка во црква “Св. Никола”', icon: ['fas','church']           },
+  { time: '18:00', label: 'Склучување на брак',          icon: ['fas','ring']             },
+  { time: '18:45', label: 'Прием на гости',              icon: ['fas','glass-cheers']     },
+  { time: '20:00', label: 'Прв танц',                    icon: ['fas','music']   }
 ])
-
-onMounted(() => {
-  AOS.init({
-    once: true,      // animate only once
-    duration: 600,   // animation duration in ms
-    offset: 100      // trigger offset
-  })
-})
 </script>
 
 <style scoped>
+/* Container styling */
 .invitation {
-  background: rgba(235, 231, 215, 0.6);
+  background: rgba(235,231,215,0.6);
   backdrop-filter: blur(6px);
   border-radius: 6px;
   padding: 24px;
@@ -70,27 +60,25 @@ onMounted(() => {
   color: #333;
   text-align: center;
 }
+.names { font-size: 1.8rem; margin-bottom: 12px; }
+.invite-text { font-style: italic; font-size: 0.95rem; line-height:1.4; margin-bottom:16px; }
+.date, .venue { font-size: 1rem; margin-bottom:8px; }
+.venue { margin-bottom:24px; }
 
-.names {
-  font-size: 1.8rem;
-  margin-bottom: 12px;
+/* Fade-slide appear and enter animation */
+.fade-slide-enter-active,
+.fade-slide-appear-active {
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
-.invite-text {
-  font-style: italic;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 16px;
+.fade-slide-enter-from,
+.fade-slide-appear-from {
+  opacity: 0;
+  transform: translateY(20px);
 }
-
-.date,
-.venue {
-  font-size: 1rem;
-  margin-bottom: 8px;
-}
-
-.venue {
-  margin-bottom: 24px;
+.fade-slide-enter-to,
+.fade-slide-appear-to {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Timeline styling */
@@ -100,7 +88,6 @@ onMounted(() => {
   gap: 2rem;
   margin-bottom: 24px;
 }
-
 .timeline-step {
   display: grid;
   grid-template-columns: 48px 1fr;
@@ -108,7 +95,6 @@ onMounted(() => {
   gap: 1rem;
   position: relative;
 }
-
 .timeline-step::before {
   content: '';
   position: absolute;
@@ -119,30 +105,16 @@ onMounted(() => {
   background: #ddd;
   z-index: -1;
 }
-
 .timeline-step:first-child::before {
   top: 50%;
   height: calc(100% - 50%);
 }
-
 .timeline-step:last-child::before {
   height: 50%;
 }
-
-.icon {
-  font-size: 1.8rem;
-  color: #a33;
-}
-
-.info .time {
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-.info .label {
-  font-size: 0.9rem;
-  color: #555;
-}
+.icon { font-size: 1.8rem; color: #a33; }
+.info .time { font-weight:500; font-size:1rem; }
+.info .label { font-size:0.9rem; color:#555; }
 
 /* Families at bottom */
 .families {
@@ -150,10 +122,5 @@ onMounted(() => {
   justify-content: space-between;
   font-size: 0.9rem;
 }
-
-.families > div {
-  width: 45%;
-  text-align: center;
-  font-style: italic;
-}
+.families > div { width: 45%; text-align:center; font-style:italic; }
 </style>
