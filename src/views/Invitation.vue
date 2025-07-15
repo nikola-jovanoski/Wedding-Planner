@@ -2,15 +2,16 @@
   <div class="invitation-page">
     <!-- Show envelope first -->
     <Envelope v-if="!opened" @open="handleOpen" />
+
     <!-- Then show card with animation -->
     <transition name="fade-slide">
       <InvitationCard v-if="opened" />
     </transition>
 
+    <!-- Hidden audio, no autoplay here -->
     <audio
         id="bg-music"
         src="/audio/DieWithYou.mp3"
-        autoplay
         loop
         hidden
     ></audio>
@@ -21,18 +22,20 @@
 import { ref } from 'vue'
 import Envelope from '../components/Envelope.vue'
 import InvitationCard from '../components/InvitationCard.vue'
-import { onMounted } from 'vue'
 
 const opened = ref(false)
+
 function handleOpen() {
   opened.value = true
-}
-onMounted(() => {
+
+  // Play music as part of the user click
   const audio = document.getElementById('bg-music')
-  audio.play().catch(() => {
-    // Autoplay might be blocked—user can hit “Play”s
-  })
-})
+  if (audio) {
+    audio.play().catch(err => {
+      console.warn('Audio play was blocked:', err)
+    })
+  }
+}
 </script>
 
 <style scoped>
