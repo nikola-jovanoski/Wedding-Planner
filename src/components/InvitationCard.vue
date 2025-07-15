@@ -68,7 +68,7 @@ const steps = reactive([
 /* Fade-slide appear and enter animation */
 .fade-slide-enter-active,
 .fade-slide-appear-active {
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 3s ease, transform 5s ease;
 }
 .fade-slide-enter-from,
 .fade-slide-appear-from {
