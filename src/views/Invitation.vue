@@ -6,6 +6,14 @@
     <transition name="fade-slide">
       <InvitationCard v-if="opened" />
     </transition>
+
+    <audio
+        id="bg-music"
+        src="/audio/DieWithYou.mp3"
+        autoplay
+        loop
+        hidden
+    ></audio>
   </div>
 </template>
 
@@ -13,11 +21,18 @@
 import { ref } from 'vue'
 import Envelope from '../components/Envelope.vue'
 import InvitationCard from '../components/InvitationCard.vue'
+import { onMounted } from 'vue'
 
 const opened = ref(false)
 function handleOpen() {
   opened.value = true
 }
+onMounted(() => {
+  const audio = document.getElementById('bg-music')
+  audio.play().catch(() => {
+    // Autoplay might be blocked—user can hit “Play”s
+  })
+})
 </script>
 
 <style scoped>

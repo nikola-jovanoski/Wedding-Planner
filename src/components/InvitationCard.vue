@@ -1,7 +1,7 @@
 <template>
   <div class="invitation" id="invitation-card">
     <!-- Header text -->
-    <h1 class="names">Никола и Ања</h1>
+    <h1 class="names">Ања и Никола</h1>
     <p class="invite-text">
       Со голема радост ве покануваме<br/>
       да бидете дел од нашата свадбена приказна
@@ -27,8 +27,9 @@
 
     <!-- Families at bottom -->
     <div class="families">
-      <div>Семејство Јованоски</div>
+
       <div>Семејство Стефановски</div>
+      <div>Семејство Јованоски</div>
     </div>
   </div>
 </template>
