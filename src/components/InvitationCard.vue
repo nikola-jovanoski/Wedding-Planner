@@ -1,30 +1,27 @@
 <template>
   <div class="invitation" id="invitation-card">
     <!-- Header text -->
-    <h1 class="names">Ања и Никола</h1>
-    <p class="invite-text">
+    <div style="font-family:'Alex Brush',cursive; font-size:2.5rem; color:#8B0000;"> Anja &amp; Nikola </div>    <p class="invite-text">
       Со голема радост ве покануваме<br/>
-      да бидете дел од нашата свадбена веселба
-      и да ја споделите со нас нашата свадбена приказна
+      да бидете дел од нашата свадбена веселба и да ја споделите со нас нашата свадбена приказна
     </p>
     <p class="date">20.09.2025</p>
     <p class="venue">Ресторан „Сајгија“, Гостивар</p>
 
-    <!-- Timeline with appear animation on load -->
-    <transition-group name="fade-slide" tag="div" class="timeline" appear>
+    <!-- Timeline using custom icons from public/icons/1.png, 2.png, ... -->
+    <div class="timeline">
       <div
           v-for="(step, i) in steps"
           :key="i"
           class="timeline-step"
-          :style="{ transitionDelay: `${i * 150}ms` }"
       >
-        <font-awesome-icon :icon="step.icon" class="icon" />
+        <img :src="step.iconUrl" class="icon" :alt="step.label" />
         <div class="info">
           <div class="time">{{ step.time }}</div>
           <div class="label">{{ step.label }}</div>
         </div>
       </div>
-    </transition-group>
+    </div>
 
     <!-- Families at bottom -->
     <div class="families">
@@ -33,21 +30,23 @@
     </div>
 
     <!-- RSVP request -->
-    <p class="rsvp">*Ве молиме потврдете го вашето присуство</p>
+    <p class="rsvp">*Ве молиме потврдете го вашето присуство најдоцна до 25ти Август</p>
   </div>
 </template>
 
 <script setup>
 import { reactive } from 'vue'
 
+// Place your custom icon PNGs in public/icons named 1.png, 2.png, etc.
 const steps = reactive([
-  { time: '08:30', label: 'Забава кај младоженецот',     icon: ['fas','champagne-glasses'] },
-  { time: '11:30', label: 'По невестата',                icon: ['fas','car-side']         },
-  { time: '13:30', label: 'Венчавка во црква “Св. Никола”', icon: ['fas','church']           },
-  { time: '18:00', label: 'Склучување на брак',          icon: ['fas','ring']             },
-  { time: '18:45', label: 'Прием на гости',              icon: ['fas','glass-cheers']     },
-  { time: '20:00', label: 'Прв танц',                    icon: ['fas','music']            }
+  { time: '08:30', label: 'Забава кај младоженецот',     iconUrl: '/1.png' },
+  { time: '11:30', label: 'По невестата',                iconUrl: '/2.png' },
+  { time: '13:30', label: 'Венчавка во црква “Св. Никола”', iconUrl: '/3.png' },
+  { time: '18:00', label: 'Склучување на брак',          iconUrl: '/4.png' },
+  { time: '18:45', label: 'Прием на гости',              iconUrl: '/5.png' },
+  { time: '20:00', label: 'Прв танц',                    iconUrl: '/6.png' }
 ])
+
 </script>
 
 <style scoped>
@@ -68,7 +67,9 @@ const steps = reactive([
   text-align: center;
 }
 .names {
-  font-size: 2.2rem;
+  font-family: 'Alex Brush', cursive;
+  font-size: 2.8rem;
+  color: #8B0000;
   margin-bottom: 12px;
 }
 .invite-text {
@@ -85,22 +86,6 @@ const steps = reactive([
   margin-bottom: 24px;
 }
 
-/* Fade-slide appear and enter animation */
-.fade-slide-enter-active,
-.fade-slide-appear-active {
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.fade-slide-enter-from,
-.fade-slide-appear-from {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.fade-slide-enter-to,
-.fade-slide-appear-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Timeline styling */
 .timeline {
   display: flex;
@@ -115,26 +100,9 @@ const steps = reactive([
   gap: 1rem;
   position: relative;
 }
-.timeline-step::before {
-  content: '';
-  position: absolute;
-  top: -2rem;
-  left: 24px;
-  width: 2px;
-  height: calc(100% + 2rem);
-  background: #ddd;
-  z-index: -1;
-}
-.timeline-step:first-child::before {
-  top: 50%;
-  height: calc(100% - 50%);
-}
-.timeline-step:last-child::before {
-  height: 50%;
-}
 .icon {
-  font-size: 1.8rem;
-  color: #a33;
+  width: 48px;
+  height: 48px;
 }
 .info .time {
   font-weight: 500;
@@ -162,6 +130,6 @@ const steps = reactive([
   font-size: 1rem;
   font-style: italic;
   margin-top: 16px;
-  color: #d47a90; /* soft rose color */
+  color: #d47a90;
 }
 </style>
