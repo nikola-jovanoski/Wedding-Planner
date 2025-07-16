@@ -1,14 +1,15 @@
 <template>
   <div class="invitation" id="invitation-card">
     <!-- Header text -->
-    <div style="font-family:'Alex Brush',cursive; font-size:2.5rem; color:#8B0000;"> Anja &amp; Nikola </div>    <p class="invite-text">
+    <div class="names">Ања &amp; Никола</div>
+    <p class="invite-text">
       Со голема радост ве покануваме<br/>
       да бидете дел од нашата свадбена веселба и да ја споделите со нас нашата свадбена приказна
     </p>
     <p class="date">20.09.2025</p>
     <p class="venue">Ресторан „Сајгија“, Гостивар</p>
 
-    <!-- Timeline using custom icons from public/icons/1.png, 2.png, ... -->
+    <!-- Timeline using custom icons -->
     <div class="timeline">
       <div
           v-for="(step, i) in steps"
@@ -37,7 +38,6 @@
 <script setup>
 import { reactive } from 'vue'
 
-// Place your custom icon PNGs in public/icons named 1.png, 2.png, etc.
 const steps = reactive([
   { time: '08:30', label: 'Забава кај младоженецот',     iconUrl: '/1.png' },
   { time: '11:30', label: 'По невестата',                iconUrl: '/2.png' },
@@ -46,90 +46,83 @@ const steps = reactive([
   { time: '18:45', label: 'Прием на гости',              iconUrl: '/5.png' },
   { time: '20:00', label: 'Прв танц',                    iconUrl: '/6.png' }
 ])
-
 </script>
 
 <style scoped>
-/* Import a single elegant script font for the entire card */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Alex+Brush&display=swap');
 
-/* Container styling */
 .invitation {
   background: rgba(235,231,215,0.6);
   backdrop-filter: blur(6px);
   border-radius: 6px;
-  padding: 24px;
+  padding: 20px;           /* slightly increased from 16px */
   max-width: 360px;
   margin: auto;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   font-family: 'Great Vibes', cursive;
   color: #333;
   text-align: center;
 }
 .names {
   font-family: 'Alex Brush', cursive;
-  font-size: 2.8rem;
+  font-size: 2.6rem;       /* slight bump from 2.4 to retain prominence */
   color: #8B0000;
-  margin-bottom: 12px;
+  margin-bottom: 10px;     /* mild spacing */
 }
 .invite-text {
-  font-size: 1.3rem;
-  line-height: 1.4;
-  margin-bottom: 16px;
+  font-size: 1.2rem;       /* between 1.1 and 1.3 */
+  line-height: 1.35;
+  margin-bottom: 14px;
 }
 .date,
 .venue {
-  font-size: 1.3rem;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 7px;
 }
 .venue {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
-/* Timeline styling */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 24px;
+  gap: 1.5rem;             /* moderate gap */
+  margin-bottom: 18px;
 }
 .timeline-step {
   display: grid;
-  grid-template-columns: 48px 1fr;
+  grid-template-columns: 44px 1fr;  /* icon slightly smaller */
   align-items: center;
-  gap: 1rem;
-  position: relative;
+  gap: 0.85rem;
 }
 .icon {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
 }
 .info .time {
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .info .label {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #555;
 }
 
-/* Families at bottom */
 .families {
   display: flex;
   justify-content: space-between;
-  font-size: 1.3rem;
-  margin-top: 12px;
+  font-size: 1.2rem;
+  margin-top: 10px;
 }
 .families > div {
   width: 45%;
   text-align: center;
 }
 
-/* RSVP text */
 .rsvp {
-  font-size: 1rem;
+  font-size: 0.95rem;       /* tiny reduction */
   font-style: italic;
-  margin-top: 16px;
+  margin-top: 14px;
   color: #d47a90;
 }
 </style>
