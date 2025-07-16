@@ -9,12 +9,13 @@
     <p class="date">20.09.2025</p>
     <p class="venue">Ресторан „Сајгија“, Гостивар</p>
 
-    <!-- Timeline using custom icons from public/icons/1.png, 2.png, ... -->
-    <div class="timeline">
+
+    <transition-group name="fade-slide" tag="div" class="timeline" appear>
       <div
           v-for="(step, i) in steps"
           :key="i"
           class="timeline-step"
+          :style="{ transitionDelay: `${i * 150}ms` }"
       >
         <img :src="step.iconUrl" class="icon" :alt="step.label" />
         <div class="info">
@@ -22,7 +23,8 @@
           <div class="label">{{ step.label }}</div>
         </div>
       </div>
-    </div>
+    </transition-group>
+
 
     <!-- Families at bottom -->
     <div class="families">
@@ -67,12 +69,6 @@ const steps = reactive([
   font-family: 'Great Vibes', cursive;
   color: #333;
   text-align: center;
-}
-.names {
-  font-family: 'Alex Brush', cursive;
-  font-size: 2.8rem;
-  color: #8B0000;
-  margin-bottom: 12px;
 }
 .invite-text {
   font-size: 1.3rem;
@@ -141,4 +137,10 @@ const steps = reactive([
   margin-top: 16px;
   color: #d47a90;
 }
+/* make the fade‑slide animations slower (1s instead of 0.6s) */
+.fade-slide-enter-active,
+.fade-slide-appear-active {
+  transition: opacity 3s ease, transform 5s ease;
+}
+
 </style>
