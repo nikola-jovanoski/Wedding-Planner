@@ -58,7 +58,7 @@ const steps = reactive([
   background: rgba(235,231,215,0.6);
   backdrop-filter: blur(6px);
   border-radius: 6px;
-  padding: 20px;               /* reduced padding */
+  padding: 16px;               /* reduced padding */
   max-width: 360px;
   margin: auto;
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
@@ -69,7 +69,7 @@ const steps = reactive([
 .invite-text {
   font-size: 1.3rem;
   line-height: 1.4;
-  margin-bottom: 14px;         /* slightly tighter */
+  margin-bottom: 12px;         /* slightly tighter */
 }
 .date,
 .venue {
@@ -77,14 +77,14 @@ const steps = reactive([
   margin-bottom: 6px;
 }
 .venue {
-  margin-bottom: 20px;         /* reduce from 24px */
+  margin-bottom: 16px;         /* reduce from 24px */
 }
 
 /* Timeline styling */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;                 /* reduce from 2rem */
+  gap: 1.2rem;                 /* reduce from 2rem */
   margin-bottom: 20px;         /* reduce from 24px */
 }
 .timeline-step {
@@ -111,7 +111,7 @@ const steps = reactive([
   display: flex;
   justify-content: space-between;
   font-size: 1.2rem;
-  margin-top: 8px;            /* reduce margin */
+  margin-top: 6px;            /* reduce margin */
   padding: 0 16px;
 }
 .families > div {
@@ -123,6 +123,7 @@ const steps = reactive([
 /* RSVP text */
 .rsvp {
   font-family: 'Times New Roman', cursive;
+
   font-size: 0.8rem;          /* slight reduction */
   font-style: italic;
   margin-top: 12px;
