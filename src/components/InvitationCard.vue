@@ -4,7 +4,8 @@
     <h1 class="names">Ања и Никола</h1>
     <p class="invite-text">
       Со голема радост ве покануваме<br/>
-      да бидете дел од нашата свадбена приказна
+      да бидете дел од нашата свадбена веселба
+      и да ја споделите со нас нашата свадбена приказна
     </p>
     <p class="date">20.09.2025</p>
     <p class="venue">Ресторан „Сајгија“, Гостивар</p>
@@ -27,7 +28,6 @@
 
     <!-- Families at bottom -->
     <div class="families">
-
       <div>Семејство Стефановски</div>
       <div>Семејство Јованоски</div>
     </div>
@@ -43,11 +43,14 @@ const steps = reactive([
   { time: '13:30', label: 'Венчавка во црква “Св. Никола”', icon: ['fas','church']           },
   { time: '18:00', label: 'Склучување на брак',          icon: ['fas','ring']             },
   { time: '18:45', label: 'Прием на гости',              icon: ['fas','glass-cheers']     },
-  { time: '20:00', label: 'Прв танц',                    icon: ['fas','music']   }
+  { time: '20:00', label: 'Прв танц',                    icon: ['fas','music']            }
 ])
 </script>
 
 <style scoped>
+/* Import a single elegant script font for the entire card */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 /* Container styling */
 .invitation {
   background: rgba(235,231,215,0.6);
@@ -57,19 +60,32 @@ const steps = reactive([
   max-width: 360px;
   margin: auto;
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-  font-family: 'Playfair Display', serif;
+  font-family: 'Great Vibes', cursive;
   color: #333;
   text-align: center;
 }
-.names { font-size: 1.8rem; margin-bottom: 12px; }
-.invite-text { font-style: italic; font-size: 0.95rem; line-height:1.4; margin-bottom:16px; }
-.date, .venue { font-size: 1rem; margin-bottom:8px; }
-.venue { margin-bottom:24px; }
+.names {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+.invite-text {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.date,
+.venue {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+.venue {
+  margin-bottom: 24px;
+}
 
 /* Fade-slide appear and enter animation */
 .fade-slide-enter-active,
 .fade-slide-appear-active {
-  transition: opacity 3s ease, transform 5s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-slide-enter-from,
 .fade-slide-appear-from {
@@ -113,15 +129,28 @@ const steps = reactive([
 .timeline-step:last-child::before {
   height: 50%;
 }
-.icon { font-size: 1.8rem; color: #a33; }
-.info .time { font-weight:500; font-size:1rem; }
-.info .label { font-size:0.9rem; color:#555; }
+.icon {
+  font-size: 1.8rem;
+  color: #a33;
+}
+.info .time {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+.info .label {
+  font-size: 1.3rem;
+  color: #555;
+}
 
 /* Families at bottom */
 .families {
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
+  margin-top: 12px;
 }
-.families > div { width: 45%; text-align:center; font-style:italic; }
+.families > div {
+  width: 45%;
+  text-align: center;
+}
 </style>
