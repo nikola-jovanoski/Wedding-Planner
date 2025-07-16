@@ -31,6 +31,9 @@
       <div>Семејство Стефановски</div>
       <div>Семејство Јованоски</div>
     </div>
+
+    <!-- RSVP request -->
+    <p class="rsvp">*Ве молиме потврдете го вашето присуство</p>
   </div>
 </template>
 
@@ -152,5 +155,13 @@ const steps = reactive([
 .families > div {
   width: 45%;
   text-align: center;
+}
+
+/* RSVP text */
+.rsvp {
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 16px;
+  color: #d47a90; /* soft rose color */
 }
 </style>
