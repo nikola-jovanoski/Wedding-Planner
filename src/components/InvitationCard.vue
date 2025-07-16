@@ -9,7 +9,7 @@
     <p class="date">20.09.2025</p>
     <p class="venue">Ресторан „Сајгија“, Гостивар</p>
 
-
+    <!-- Timeline with appear animation on load -->
     <transition-group name="fade-slide" tag="div" class="timeline" appear>
       <div
           v-for="(step, i) in steps"
@@ -25,13 +25,11 @@
       </div>
     </transition-group>
 
-
     <!-- Families at bottom -->
     <div class="families">
       <div>Семејство<br>Стефановски</div>
       <div>Семејство<br>Јованоски</div>
     </div>
-
 
     <!-- RSVP request -->
     <p class="rsvp">*Ве молиме потврдете го вашето присуство најдоцна до 25ти Август</p>
@@ -41,7 +39,6 @@
 <script setup>
 import { reactive } from 'vue'
 
-// Place your custom icon PNGs in public/icons named 1.png, 2.png, etc.
 const steps = reactive([
   { time: '08:30', label: 'Забава кај младоженецот',     iconUrl: '/1.png' },
   { time: '11:30', label: 'По невестата',                iconUrl: '/2.png' },
@@ -50,7 +47,6 @@ const steps = reactive([
   { time: '18:45', label: 'Прием на гости',              iconUrl: '/5.png' },
   { time: '20:00', label: 'Прв танц',                    iconUrl: '/6.png' }
 ])
-
 </script>
 
 <style scoped>
@@ -62,7 +58,7 @@ const steps = reactive([
   background: rgba(235,231,215,0.6);
   backdrop-filter: blur(6px);
   border-radius: 6px;
-  padding: 24px;
+  padding: 20px;               /* reduced padding */
   max-width: 360px;
   margin: auto;
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
@@ -73,30 +69,29 @@ const steps = reactive([
 .invite-text {
   font-size: 1.3rem;
   line-height: 1.4;
-  margin-bottom: 16px;
+  margin-bottom: 14px;         /* slightly tighter */
 }
 .date,
 .venue {
   font-size: 1.3rem;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .venue {
-  margin-bottom: 24px;
+  margin-bottom: 20px;         /* reduce from 24px */
 }
 
 /* Timeline styling */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 24px;
+  gap: 1.5rem;                 /* reduce from 2rem */
+  margin-bottom: 20px;         /* reduce from 24px */
 }
 .timeline-step {
   display: grid;
   grid-template-columns: 48px 1fr;
   align-items: center;
-  gap: 1rem;
-  position: relative;
+  gap: 0.8rem;                 /* reduce gap */
 }
 .icon {
   width: 48px;
@@ -116,13 +111,8 @@ const steps = reactive([
   display: flex;
   justify-content: space-between;
   font-size: 1.2rem;
-  margin-top: 10px;
-  padding: 0 16px; /* add horizontal padding */
-}
-.families > div {
-  width: 45%;
-  text-align: center;
-  line-height: 1.2;
+  margin-top: 8px;            /* reduce margin */
+  padding: 0 16px;
 }
 .families > div {
   width: 45%;
@@ -132,15 +122,17 @@ const steps = reactive([
 
 /* RSVP text */
 .rsvp {
-  font-size: 1rem;
+  font-family: 'Times New Roman', cursive;
+  font-size: 0.8rem;          /* slight reduction */
   font-style: italic;
-  margin-top: 16px;
+  margin-top: 12px;
   color: #d47a90;
 }
+
 /* make the fade‑slide animations slower (1s instead of 0.6s) */
 .fade-slide-enter-active,
 .fade-slide-appear-active {
-  transition: opacity 3s ease, transform 5s ease;
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 </style>
