@@ -33,3 +33,5 @@ const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
 app.mount('#app')
+
+//     <div style="font-family:'Alex Brush',cursive; font-size:2.5rem; color:#8B0000;"> Anja &amp; Nikola </div>
