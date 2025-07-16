@@ -40,7 +40,7 @@
 import { reactive } from 'vue'
 
 const steps = reactive([
-  { time: '08:30', label: 'Забава кај младоженецот',     iconUrl: '/1.png' },
+  { time: '08:00', label: 'Забава кај младоженецот',     iconUrl: '/1.png' },
   { time: '11:30', label: 'По невестата',                iconUrl: '/2.png' },
   { time: '13:30', label: 'Венчавка во црква “Св. Никола”', iconUrl: '/3.png' },
   { time: '18:00', label: 'Склучување на брак',          iconUrl: '/4.png' },
