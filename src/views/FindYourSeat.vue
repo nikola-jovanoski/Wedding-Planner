@@ -70,19 +70,21 @@ function levenshtein(a, b) {
 function hasCyrillic(s) { return /[\u0400-\u04FF]/.test(s || ""); }
 
 // кирилица → латиница (МК)
+// кирилица → латиница (МК)
 function cyrToLatin(s) {
   const map = {
     а:'a', б:'b', в:'v', г:'g', д:'d', ѓ:'gj', е:'e', ж:'zh', з:'z', ѕ:'dz',
-    и:'i', ј:'j', к:'k', љ:'lj', м:'m', н:'n', њ:'nj', о:'o', п:'p',
+    и:'i', ј:'j', к:'k', л:'l', љ:'lj', м:'m', н:'n', њ:'nj', о:'o', п:'p',
     р:'r', с:'s', т:'t', ќ:'kj', у:'u', ф:'f', х:'h', ц:'c', ч:'ch',
     џ:'dzh', ш:'sh',
     А:'a', Б:'b', В:'v', Г:'g', Д:'d', Ѓ:'gj', Е:'e', Ж:'zh', З:'z', Ѕ:'dz',
-    И:'i', Ј:'j', К:'k', Љ:'lj', М:'m', Н:'n', Њ:'nj', О:'o', П:'p',
+    И:'i', Ј:'j', К:'k', Л:'l', Љ:'lj', М:'m', Н:'n', Њ:'nj', О:'o', П:'p',
     Р:'r', С:'s', Т:'t', Ќ:'kj', У:'u', Ф:'f', Х:'h', Ц:'c', Ч:'ch',
     Џ:'dzh', Ш:'sh'
   };
   return String(s).replace(/[\u0400-\u04FF]/g, ch => map[ch] ?? ch);
 }
+
 
 // латински дијакритици → диграфи
 function latinDiacriticsToDigraphs(s) {
@@ -113,35 +115,15 @@ function titleCaseWords(str) {
   return str.replace(/\b\p{L}+/gu, w => w.charAt(0).toUpperCase() + w.slice(1));
 }
 
-// латиница → кирилица (Title Case)
-function latinToCyr(s) {
-  if (!s) return s;
-  let x = latinDiacriticsToDigraphs(s);
-  const lower = x.toLowerCase();
-  let y = lower
-      .replace(/dzh/g, 'џ').replace(/dz/g, 'ѕ')
-      .replace(/gj/g,  'ѓ').replace(/kj/g, 'ќ')
-      .replace(/lj/g,  'љ').replace(/nj/g, 'њ')
-      .replace(/zh/g,  'ж').replace(/ch/g, 'ч').replace(/sh/g, 'ш')
-      .replace(/c/g,   'ц')
-      .replace(/a/g,   'а').replace(/b/g, 'б').replace(/v/g, 'в')
-      .replace(/g/g,   'г').replace(/d/g, 'д').replace(/e/g, 'е')
-      .replace(/z/g,   'з').replace(/i/g, 'и').replace(/j/g, 'ј')
-      .replace(/k/g,   'к').replace(/m/g, 'м').replace(/n/g, 'н')
-      .replace(/o/g,   'о').replace(/p/g, 'п').replace(/r/g, 'р')
-      .replace(/s/g,   'с').replace(/t/g, 'т').replace(/u/g, 'у')
-      .replace(/f/g,   'ф').replace(/h/g, 'х');
-  return titleCaseWords(y);
-}
-
 // кирилица → латиница (Title Case)
 function cyrToLatinProper(s) {
   const lower = cyrToLatin(s).toLowerCase();
   return titleCaseWords(lower);
 }
 
-function displayInSameScript(originalDisplay, inputIsCyr) {
-  return inputIsCyr ? latinToCyr(originalDisplay) : cyrToLatinProper(originalDisplay);
+// секогаш враќај латиница
+function displayInSameScript(originalDisplay) {
+  return cyrToLatinProper(originalDisplay);
 }
 
 // помошни за прв токен
@@ -184,29 +166,23 @@ export default {
     },
     updateDropdown() {
       const raw = this.query || "";
-      const inputIsCyr = hasCyrillic(raw);
       const q = normalizeName(raw);
       const qTokens = q.split(" ").filter(Boolean);
       const qFirst = qTokens[0] || "";
       const qSecond = qTokens[1] || ""; // дел од презиме
 
-      // отвори само ако има барем 2 букви во првото име
       if (qFirst.length < 2) {
         this.open = false; this.shownSuggestions = []; this.hi = -1; return;
       }
 
-      // кандидати кои почнуваат со првото име
       let pool = this.guests.filter(g => g.first.startsWith(qFirst));
 
-      // ако корисникот почнал презиме → филтрирај строго на презимето
       if (qSecond.length >= 1) {
         pool = pool.filter(g => {
-          const parts = g.name.split(" ");           // нормализирани токени
+          const parts = g.name.split(" ");
           const last  = (parts[1] || "");
-          return last.startsWith(qSecond);           // остани само тие што се совпаѓаат со презимето
+          return last.startsWith(qSecond);
         });
-
-        // ако ништо не остане, пробај попуштливо (подниза во презиме)
         if (pool.length === 0) {
           pool = this.guests.filter(g => {
             const [first, last = ""] = g.name.split(" ");
@@ -215,17 +191,15 @@ export default {
         }
       }
 
-      // ако сè уште е празно, додади секундарни (подниза во целото име)
       if (pool.length === 0) {
         pool = this.guests.filter(g => g.name.includes(qFirst));
       }
 
-      // прикажи максимум 8, но ако има точно еден што одговара на и двете – останува само тој
       const shown = pool.slice(0, 8).map(g => ({
         key: g.key,
         table: g.table,
         displayOriginal: g.display,
-        displayForInput: displayInSameScript(g.display, inputIsCyr)
+        displayForInput: displayInSameScript(g.display)
       }));
 
       this.shownSuggestions = shown;
@@ -246,7 +220,7 @@ export default {
     },
     closeDropdown() { this.open = false; this.hi = -1; },
     selectSuggestion(s) {
-      this.query = s.displayForInput;  // пополни го целото име какво што го гледа корисникот
+      this.query = s.displayForInput;
       this.closeDropdown();
       this.findTable();
     },
@@ -256,26 +230,23 @@ export default {
       const raw = this.query;
       const qNorm = normalizeName(raw);
 
-      // 1) точно совпаѓање
       let guest = this.guests.find(g => g.name === qNorm);
 
-      // 2) најблиско ако нема
       if (!guest) {
         const ranked = this.guests
             .map(g => ({ ...g, dist: levenshtein(qNorm, g.name) }))
             .sort((a, b) => a.dist - b.dist);
         const best = ranked[0];
 
-        if (best && best.dist <= 1) {    // прифати многу блиску како точно
+        if (best && best.dist <= 1) {
           this.table = best.table;
           this.suggestion = "";
           return;
         }
 
-        // suggest (во истото писмо како внесот)
         if (best && best.dist <= 3) {
           this.table = -1;
-          this.suggestion = displayInSameScript(best.display, hasCyrillic(raw));
+          this.suggestion = cyrToLatinProper(best.display);
         } else {
           this.table = -1;
           this.suggestion = "";
@@ -283,7 +254,6 @@ export default {
         return;
       }
 
-      // 3) најдено
       this.table = guest.table;
       this.suggestion = "";
     },
