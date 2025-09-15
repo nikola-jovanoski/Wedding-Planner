@@ -1,12 +1,11 @@
 [
-  { "name": "Nikola Jovanoski", "table": "Главна маса" },
-  { "name": "Anja Stefanovska", "table": "Главна маса" },
-  { "name": "Slagjan Nikolovski", "table": "Главна маса" },
-  { "name": "Darinka Mihajlovska", "table": "Главна маса" },
-  { "name": "Kristijan Dailoski", "table": "Главна маса" },
-  { "name": "Ivana Bojkovikj Jovanovski", "table": "Главна маса" },
-  { "name": "Andrej Jovanovski", "table": "Главна маса" },
-
+  { "name": "Nikola Jovanoski", "table": 0 },
+  { "name": "Anja Stefanovska", "table": 0 },
+  { "name": "Slagjan Nikolovski", "table": 0 },
+  { "name": "Darinka Mihajlovska", "table": 0 },
+  { "name": "Kristijan Dailoski", "table": 0 },
+  { "name": "Ivana Bojkovikj Jovanovski", "table": 0 },
+  { "name": "Andrej Jovanovski", "table": 0 },
 
   { "name": "Mara Jovanoska", "table": 1 },
   { "name": "Voislav Jovanoski", "table": 1 },
