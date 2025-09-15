@@ -1,4 +1,13 @@
 [
+  { "name": "Nikola Jovanoski", "table": "Главна маса" },
+  { "name": "Anja Stefanovska", "table": "Главна маса" },
+  { "name": "Slagjan Nikolovski", "table": "Главна маса" },
+  { "name": "Darinka Mihajlovska", "table": "Главна маса" },
+  { "name": "Kristijan Dailoski", "table": "Главна маса" },
+  { "name": "Ivana Bojkovikj Jovanovski", "table": "Главна маса" },
+  { "name": "Andrej Jovanovski", "table": "Главна маса" },
+
+
   { "name": "Mara Jovanoska", "table": 1 },
   { "name": "Voislav Jovanoski", "table": 1 },
   { "name": "Gjoko Nikolovski", "table": 1 },
