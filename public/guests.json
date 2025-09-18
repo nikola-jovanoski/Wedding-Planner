@@ -139,8 +139,6 @@
   { "name": "Feko Tefiku", "table": 14 },
 
   { "name": "Darko", "table": 15 },
-  { "name": "Zive Nikoloski", "table": 15 },
-  { "name": "Sanja Nikoloska", "table": 15 },
   { "name": "Petra Boskoska", "table": 15 },
   { "name": "Bosko Boskoski", "table": 15 },
   { "name": "Darko Gruevski", "table": 15 },
@@ -253,6 +251,9 @@
   { "name": "Bojan Trencic", "table": 45 },
   { "name": "Tamara Veljkovska", "table": 45 },
   { "name": "Aleksandar Veljkovski", "table": 45 },
+  { "name": "Marko Boskovski", "table": 45 },
+  { "name": "Daniela Boskovska", "table": 45 },
+
 
   { "name": "Ina Stojchevska", "table": 46 },
   { "name": "Leona Stojchevska Dodic", "table": 46 },
@@ -280,14 +281,13 @@
   { "name": "Vera Vukovic", "table": 48 },
   { "name": "Vesna Vukovic", "table": 48 },
 
-  { "name": "Sonja Tasevska", "table": 49 },
-  { "name": "Predrag Tasevski", "table": 49 },
-  { "name": "Lidija Zafirovska", "table": 49 },
-  { "name": "Teodora Zafirovska", "table": 49 },
-  { "name": "Frosina Jakimovska", "table": 49 },
-  { "name": "Igor Jakimovski", "table": 49 },
-  { "name": "Vera Ristovska", "table": 49 },
-  { "name": "Tomce Ristovski", "table": 49 },
+  { "name": "Rozita Trajkovska", "table": 49 },
+  { "name": "Miroljub Trajkovski", "table": 49 },
+  { "name": "Katerina Kostadinova", "table": 49 },
+  { "name": "Jasmina Petrusevska", "table": 49 },
+  { "name": "Tanja Stoilkovic", "table": 49 },
+  { "name": "Vanco Hristovski", "table": 49 },
+  { "name": "Katerina Hristovska", "table": 49 },
 
   { "name": "Rozita Trajkovska", "table": 50 },
   { "name": "Miroljub Trajkovski", "table": 50 },
@@ -322,6 +322,15 @@
   { "name": "Marko Docevski", "table": 36 },
   { "name": "Milena Vachkova", "table": 36 },
   { "name": "Bojan Vachkov", "table": 36 },
+
+  { "name": "Sonja Tasevska", "table": 37 },
+  { "name": "Predrag Tasevski", "table": 37 },
+  { "name": "Lidija Zafirovska", "table": 37 },
+  { "name": "Teodora Zafirovska", "table": 37 },
+  { "name": "Frosina Jakimovska", "table": 37 },
+  { "name": "Igor Jakimovski", "table": 37 },
+  { "name": "Vera Ristovska", "table": 37 },
+  { "name": "Tomce Ristovski", "table": 37 },
 
   { "name": "Nikola Krstevski", "table": 38 },
   { "name": "Mladen Krstevski", "table": 38 },
