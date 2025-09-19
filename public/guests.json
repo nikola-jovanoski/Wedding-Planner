@@ -169,8 +169,6 @@
   { "name": "Gele Angelkoski", "table": 28 },
   { "name": "Irena Angelkoska", "table": 28 },
   { "name": "Trajce Biskoski", "table": 28 },
-  { "name": "Antonio Tancev", "table": 28 },
-  { "name": "Aleksandra Tancev", "table": 28 },
 
   { "name": "Aleksandar Paunoski", "table": 29 },
   { "name": "Tome Stankoski", "table": 29 },
@@ -180,6 +178,7 @@
   { "name": "Ilvana Eftoski Mirceska", "table": 29 },
   { "name": "Mihajlo Dorevski", "table": 29 },
   { "name": "Nikola Stavreski", "table": 29 },
+  { "name": "Antonio Tancev", "table": 29 },
 
   { "name": "Leo Pavloski", "table": 30 },
   { "name": "Nikola Domazetovikj", "table": 30 },
