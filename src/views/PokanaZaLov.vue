@@ -1,17 +1,14 @@
 <template>
   <div class="page">
-    <!-- FULLSCREEN background -->
     <div class="bg"></div>
-    <div class="overlay"></div>
 
-    <!-- INVITATION CARD -->
     <section class="card">
       <img src="/public/logo.svg" alt="Logo" class="logo" />
 
       <h1 class="title">Покана</h1>
 
       <p class="lead">
-        Со особена чест и задоволство Ве покануваме на<br/>
+        Со особена чест и задоволство ве покануваме на<br/>
         <strong>заедничка хајка на дива свиња</strong><br/>
         која ќе се одржи на <strong>11.10.2025 година</strong>.
       </p>
@@ -21,18 +18,73 @@
         <p>🍽️ После ловот: <strong>Свечен ручек</strong> во Домот, с. Церово во 12:00 часот</p>
       </div>
 
-      <p class="footer">Со почит,<br/>Ловечко друштво „…“</p>
+      <p class="footer">Со почит,<br/>Ловечко друштво „БИСТРА“</p>
     </section>
+
+    <!-- 🎶 Аудио (без autoplay, ќе стартува преку код по прв гест) -->
+    <audio
+        id="bg-music"
+        src="/audio/lovnamuzika.mp3"
+        preload="auto"
+        loop
+        playsinline
+    ></audio>
   </div>
 </template>
+
+<script setup>
+import { onMounted, onBeforeUnmount } from 'vue'
+
+let started = false
+
+const tryPlay = () => {
+  if (started) return
+  const el = document.getElementById('bg-music')
+  if (!el) return
+  el.volume = 0.6
+  el.play().then(() => {
+    started = true
+    removeGestureListeners()
+  }).catch(() => {
+    // ќе пробаме пак на следниот гест/видливост
+  })
+}
+
+const addGestureListeners = () => {
+  ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'].forEach(evt =>
+      window.addEventListener(evt, tryPlay, { passive: true })
+  )
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') tryPlay()
+  })
+}
+
+const removeGestureListeners = () => {
+  ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'].forEach(evt =>
+      window.removeEventListener(evt, tryPlay)
+  )
+}
+
+onMounted(() => {
+  // прв обид (ако прелистувачот дозволи)
+  tryPlay()
+  // ако не, ќе стартува на првиот гест
+  addGestureListeners()
+})
+onBeforeUnmount(removeGestureListeners)
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap');
 
 :root{
-  --card-bg: rgba(255, 254, 249, 0.85); /* помалку транспарентно */
+  --card-bg: rgba(255, 254, 249, 0.82);
   --border: #3d4a33;
   --title: #2e4427;
+
+  --page-gutter: clamp(14px, 5vw, 32px);
+  --card-max: 720px;
+  --card-radius: 20px;
 }
 
 .page{
@@ -44,30 +96,36 @@
   align-items:center;
   justify-content:center;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  padding-inline: calc(var(--page-gutter) + env(safe-area-inset-left));
+  padding-block: clamp(14px, 4vh, 40px);
 }
+
 .bg{
   position:fixed;
   inset:0;
-  background:
-      url('https://images.unsplash.com/photo-1694950986821-1169560546e7?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
-      center center / cover no-repeat;
+  background-image:
+      linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.45)),
+      url('/pozadina.jpg');
+  background-position: center center, center center;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   z-index:-2;
+  transform: translateZ(0);
 }
-.overlay{
-  position:fixed; inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.45));
-  z-index:-1;
-}
+
 .card{
-  width:min(92vw, 720px);
-  margin: 4dvh auto;
-  padding: clamp(20px, 4vw, 44px);
-  background: var(--card-bg);
+  width: min(var(--card-max), 100%);
   border: 3px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--card-radius);
   text-align:center;
-  box-shadow:0 25px 50px rgba(0,0,0,.99); /* поголем elevation */
-  backdrop-filter: blur(5px);
+  padding: clamp(18px, 4vw, 44px);
+  box-shadow: 0 18px 42px rgba(0,0,0,.45);
+  background: var(--card-bg);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background-clip: padding-box;
+  transform: translateZ(0);
 }
 .logo{
   width:90px; height:auto;
