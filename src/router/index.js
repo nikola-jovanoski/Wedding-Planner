@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FindYourSeat from '../views/FindYourSeat.vue'
+import FindYourSeat from '../views/PokanaZaLov.vue'
 import Invitation from '../views/Invitation.vue'
 
 const routes = [
