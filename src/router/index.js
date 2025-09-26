@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FindYourSeat from '../views/PokanaZaLov.vue'
+import PokanaZaLov from '../views/PokanaZaLov.vue'
 import Invitation from '../views/Invitation.vue'
 
 const routes = [
     {
-        path: '/findyourseat',
-        name: 'FindYourSeat',
-        component: FindYourSeat,
+        path: '/pokana',
+        name: 'Pokana',
+        component: PokanaZaLov,
         meta: { title: 'Пронајди маса' }
     },
     {
@@ -17,7 +17,7 @@ const routes = [
     },
     {
         path: '/:catchAll(.*)',
-        redirect: '/findyourseat'
+        redirect: '/pokana'
     }
 ]
 

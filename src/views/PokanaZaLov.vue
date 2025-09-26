@@ -3,7 +3,7 @@
     <div class="bg"></div>
 
     <section class="card">
-      <img src="/public/logo.svg" alt="Logo" class="logo" />
+      <img src="/logo.svg" alt="Logo" class="logo" />
 
       <h1 class="title">Покана</h1>
 
@@ -18,11 +18,11 @@
         <p>🍽️ После ловот: <strong>Свечен ручек</strong> во Домот, с. Церово во 12:00 часот</p>
       </div>
 
-      <p class="footer">Со почит,<br/>Ловечко друштво „БИСТРА“</p>
+      <p class="footer">Со почит,<br/>Ловно друштво „БИСТРА“</p>
       <p class="footer">Добар поглед и мирна рака</p>
     </section>
 
-    <!-- 🎶 Аудио (без autoplay, ќе стартува преку код по прв гест) -->
+    <!-- 🎶 Аудио -->
     <audio
         id="bg-music"
         src="/audio/lovnamuzika.mp3"
@@ -46,30 +46,26 @@ const tryPlay = () => {
   el.play().then(() => {
     started = true
     removeGestureListeners()
-  }).catch(() => {
-    // ќе пробаме пак на следниот гест/видливост
+  }).catch(err => {
+    console.warn('Autoplay blocked:', err)
   })
 }
 
 const addGestureListeners = () => {
-  ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'].forEach(evt =>
+  // ќе пушти на scroll, click или touch
+  ['scroll', 'pointerdown', 'touchstart', 'click'].forEach(evt =>
       window.addEventListener(evt, tryPlay, { passive: true })
   )
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') tryPlay()
-  })
 }
 
 const removeGestureListeners = () => {
-  ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'].forEach(evt =>
+  ['scroll', 'pointerdown', 'touchstart', 'click'].forEach(evt =>
       window.removeEventListener(evt, tryPlay)
   )
 }
 
 onMounted(() => {
-  // прв обид (ако прелистувачот дозволи)
-  tryPlay()
-  // ако не, ќе стартува на првиот гест
+  tryPlay() // прв обид
   addGestureListeners()
 })
 onBeforeUnmount(removeGestureListeners)
