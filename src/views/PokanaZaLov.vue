@@ -75,9 +75,9 @@ onBeforeUnmount(removeGestureListeners)
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap');
 
 :root{
-  --card-bg: rgba(255, 254, 249, 0.82);
+  --card-bg: rgba(255, 254, 249, 0.82); /* останува исто */
   --border: #3d4a33;
-  --title: #2e4427;
+  --title: #000; /* црн наслов */
 
   --page-gutter: clamp(14px, 5vw, 32px);
   --card-max: 720px;
@@ -124,32 +124,37 @@ onBeforeUnmount(removeGestureListeners)
   background-clip: padding-box;
   transform: translateZ(0);
 }
+
 .logo{
   width:90px; height:auto;
   margin:0 auto 10px;
   object-fit:contain;
 }
+
 .title{
   font-family:'Playfair Display', serif;
   font-weight:700;
   font-size: clamp(1.8rem, 5vw, 2.6rem);
-  color: var(--title);
+  color: var(--title); /* црн */
   margin:.2rem 0 1rem;
 }
+
 .lead{
   font-size: clamp(1rem, 2.6vw, 1.15rem);
   line-height:1.7;
-  color:#172015;
+  color:#000; /* црн */
 }
+
 .details{
   margin-top: 1.1rem;
   font-size: clamp(.95rem, 2.3vw, 1.05rem);
-  color:#141414;
+  color:#000; /* црн */
 }
+
 .footer{
   margin-top: 1.2rem;
   font-style: italic;
-  color:#2a2a2a;
+  color:#000; /* црн */
   font-size: clamp(.95rem, 2.2vw, 1rem);
 }
 </style>
