@@ -13,7 +13,7 @@ const routes = [
         path: '/weddinginvitation',
         name: 'WeddingInvitation',
         component: Invitation,
-        meta: { title: 'Покана Anja & Nikola' }
+        meta: { title: 'Ловно друштво Бистра' }
     },
     {
         path: '/:catchAll(.*)',
