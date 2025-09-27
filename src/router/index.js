@@ -7,7 +7,7 @@ const routes = [
         path: '/pokana',
         name: 'Pokana',
         component: PokanaZaLov,
-        meta: { title: 'Пронајди маса' }
+        meta: { title: 'Ловно друштво Бистра' }
     },
     {
         path: '/weddinginvitation',
