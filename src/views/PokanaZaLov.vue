@@ -53,7 +53,6 @@ const tryPlay = () => {
 }
 
 const addGestureListeners = () => {
-  // ќе пушти на scroll, click или touch
   ['scroll', 'pointerdown', 'touchstart', 'click'].forEach(evt =>
       window.addEventListener(evt, tryPlay, { passive: true })
   )
@@ -66,7 +65,7 @@ const removeGestureListeners = () => {
 }
 
 onMounted(() => {
-  tryPlay() // прв обид
+  tryPlay()
   addGestureListeners()
 })
 onBeforeUnmount(removeGestureListeners)
@@ -76,9 +75,9 @@ onBeforeUnmount(removeGestureListeners)
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap');
 
 :root{
-  --card-bg: rgba(255, 254, 249, 0.82); /* останува исто */
+  --card-bg: rgba(255, 254, 249, 0.75);
   --border: #3d4a33;
-  --title: #000; /* црн наслов */
+  --title: #000;
 
   --page-gutter: clamp(14px, 5vw, 32px);
   --card-max: 720px;
@@ -120,7 +119,7 @@ onBeforeUnmount(removeGestureListeners)
   padding: clamp(18px, 4vw, 44px);
   box-shadow: 0 18px 42px rgba(0,0,0,.45);
   background: var(--card-bg);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(4px);
   background-clip: padding-box;
   transform: translateZ(0);
@@ -135,27 +134,27 @@ onBeforeUnmount(removeGestureListeners)
 .title{
   font-family:'Playfair Display', serif;
   font-weight:700;
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
-  color: var(--title); /* црн */
+  font-size: clamp(2rem, 5vw, 2.8rem); /* поголем наслов */
+  color: var(--title);
   margin:.2rem 0 1rem;
 }
 
 .lead{
-  font-size: clamp(1rem, 2.6vw, 1.15rem);
+  font-size: clamp(1.1rem, 2.6vw, 1.25rem); /* поголем текст */
   line-height:1.7;
-  color:#000; /* црн */
+  color:#000;
 }
 
 .details{
   margin-top: 1.1rem;
-  font-size: clamp(.95rem, 2.3vw, 1.05rem);
-  color:#000; /* црн */
+  font-size: clamp(1.05rem, 2.3vw, 1.15rem); /* поголем детали */
+  color:#000;
 }
 
 .footer{
   margin-top: 1.2rem;
   font-style: italic;
-  color:#000; /* црн */
-  font-size: clamp(.95rem, 2.2vw, 1rem);
+  color:#000;
+  font-size: clamp(1.05rem, 2.2vw, 1.1rem); /* поголем фуснота */
 }
 </style>
